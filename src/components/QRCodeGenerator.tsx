@@ -53,7 +53,7 @@ const QRCodeGenerator = () => {
         margin: 2,
         color: {
           dark: selectedColor,
-          light: "#00000000",
+          light: selectedColor === "#FFFFFF" ? "#000000" : "#00000000",
         },
         errorCorrectionLevel: "H",
       });
