@@ -108,8 +108,30 @@ const QRCodeGenerator = () => {
           )}
         </div>
 
-        {/* Color Picker */}
+        {/* Style Selector */}
         <div className="space-y-2">
+          <label className="text-sm font-medium text-muted-foreground">
+            Modelo
+          </label>
+          <div className="flex gap-2">
+            {STYLES.map((s) => (
+              <button
+                key={s.value}
+                onClick={() => setSelectedStyle(s.value)}
+                className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
+                  selectedStyle === s.value
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-secondary text-secondary-foreground hover:bg-border"
+                }`}
+              >
+                {s.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Color Picker */}
+        <div className={`space-y-2 transition-opacity ${isClassic ? "opacity-40 pointer-events-none" : ""}`}>
           <label className="text-sm font-medium text-muted-foreground">
             Cor do QR Code
           </label>
