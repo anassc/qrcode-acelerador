@@ -36,8 +36,11 @@ const QRCodeGenerator = () => {
   const [url, setUrl] = useState("");
   const [qrDataUrl, setQrDataUrl] = useState<string | null>(null);
   const [error, setError] = useState("");
+  const [selectedStyle, setSelectedStyle] = useState(STYLES[0].value);
   const [selectedColor, setSelectedColor] = useState(COLORS[0].value);
   const [selectedSize, setSelectedSize] = useState(SIZES[1].value);
+
+  const isClassic = selectedStyle === "classic";
 
   const generateQR = useCallback(async () => {
     const trimmed = url.trim();
@@ -53,12 +56,14 @@ const QRCodeGenerator = () => {
     }
     setError("");
     try {
+      const dark = isClassic ? "#000000" : selectedColor;
+      const light = isClassic ? "#FFFFFF" : selectedColor === "#FFFFFF" ? "#000000" : "#00000000";
       const dataUrl = await QRCode.toDataURL(trimmed, {
         width: selectedSize,
         margin: 2,
         color: {
-          dark: selectedColor,
-          light: selectedColor === "#FFFFFF" ? "#000000" : "#00000000",
+          dark,
+          light,
         },
         errorCorrectionLevel: "H",
       });
@@ -66,7 +71,7 @@ const QRCodeGenerator = () => {
     } catch {
       setError("Erro ao gerar o QR Code.");
     }
-  }, [url, selectedColor, selectedSize]);
+  }, [url, selectedColor, selectedSize, isClassic]);
 
   const downloadQR = useCallback(() => {
     if (!qrDataUrl) return;
