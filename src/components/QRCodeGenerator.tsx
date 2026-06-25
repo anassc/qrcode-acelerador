@@ -4,6 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Download, QrCode, AlertCircle } from "lucide-react";
 
+const STYLES = [
+  { label: "Moderno", value: "modern" },
+  { label: "Clássico P&B", value: "classic" },
+];
+
 const COLORS = [
   { label: "Laranja", value: "#FF8A00" },
   { label: "Branco", value: "#FFFFFF" },
