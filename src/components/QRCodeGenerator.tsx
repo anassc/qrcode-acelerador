@@ -187,7 +187,11 @@ const QRCodeGenerator = () => {
         {/* QR Code Display */}
         {qrDataUrl && (
           <div className="flex flex-col items-center gap-4 pt-2 animate-fade-in">
-            <div className="p-4 rounded-lg bg-background border border-border">
+            <div
+              className={`p-4 rounded-lg border border-border ${
+                isClassic ? "bg-white" : "bg-background"
+              }`}
+            >
               <img
                 src={qrDataUrl}
                 alt="QR Code gerado"
